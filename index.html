@@ -33,7 +33,7 @@
 
     h1 {
       font-size: 28px;
-      margin: 10px 0;
+      margin: 8px 0;
       color: #ff4d6d;
     }
 
@@ -41,11 +41,6 @@
       font-size: 22px;
       margin: 15px 0 25px;
       color: #333;
-    }
-
-    .buttons {
-      position: relative;
-      height: 110px;
     }
 
     button {
@@ -81,84 +76,104 @@
 <body>
 
   <div class="card" id="page">
-
     <div class="emoji">💖</div>
     <h1>Dhruv</h1>
     <h2>will you be my valentine?</h2>
 
-    <div class="buttons">
-      <button class="primary" id="yesBtn">Yes</button>
-      <button class="secondary" id="noBtn">No</button>
-    </div>
-
+    <button class="primary" id="yesBtn">Yes</button>
+    <button class="secondary" id="noBtn">No</button>
   </div>
 
 <script>
   let noCount = 0;
   let yesScale = 1;
-  const page = document.getElementById("page");
 
-  document.getElementById("yesBtn").onclick = nextFlowers;
-  document.getElementById("noBtn").onclick = moveNo;
+  let answers = {
+    flowers: "",
+    chocolate: "",
+    date: ""
+  };
+
+  const page = document.getElementById("page");
+  const yesBtn = document.getElementById("yesBtn");
+  const noBtn = document.getElementById("noBtn");
+
+  yesBtn.onclick = showFlowers;
+  noBtn.onclick = moveNo;
 
   function moveNo() {
     noCount++;
     yesScale += 0.25;
-
-    document.getElementById("yesBtn").style.transform =
-      `scale(${yesScale})`;
-
+    yesBtn.style.transform = `scale(${yesScale})`;
     if (noCount >= 4) {
-      document.getElementById("noBtn").style.display = "none";
+      noBtn.style.display = "none";
     }
   }
 
-  function nextFlowers() {
+  function showFlowers() {
     page.innerHTML = `
       <div class="emoji">🌸</div>
       <h2>choose your favourite flowers</h2>
 
-      <button class="option" onclick="nextChoco()">🌹 Roses</button>
-      <button class="option" onclick="nextChoco()">🌻 Sunflowers</button>
-      <button class="option" onclick="nextChoco()">🌷 Tulips</button>
-      <button class="option" onclick="nextChoco()">💐 Surprise me</button>
+      <button class="option" onclick="pickFlower('Roses 🌹')">🌹 Roses</button>
+      <button class="option" onclick="pickFlower('Sunflowers 🌻')">🌻 Sunflowers</button>
+      <button class="option" onclick="pickFlower('Tulips 🌷')">🌷 Tulips</button>
+      <button class="option" onclick="pickFlower('Surprise 💐')">💐 Surprise me</button>
     `;
   }
 
-  function nextChoco() {
+  function pickFlower(choice) {
+    answers.flowers = choice;
+    showChocolate();
+  }
+
+  function showChocolate() {
     page.innerHTML = `
       <div class="emoji">🍫</div>
       <h2>pick your chocolate</h2>
 
-      <button class="option" onclick="nextDate()">🍫 Dairy Milk</button>
-      <button class="option" onclick="nextDate()">🍬 Ferrero Rocher</button>
-      <button class="option" onclick="nextDate()">🍩 Anything sweet</button>
-      <button class="option" onclick="nextDate()">😏 You</button>
+      <button class="option" onclick="pickChocolate('Dairy Milk 🍫')">🍫 Dairy Milk</button>
+      <button class="option" onclick="pickChocolate('Ferrero Rocher 🍬')">🍬 Ferrero Rocher</button>
+      <button class="option" onclick="pickChocolate('Anything sweet 🍩')">🍩 Anything sweet</button>
+      <button class="option" onclick="pickChocolate('You 😏')">😏 You</button>
     `;
   }
 
-  function nextDate() {
+  function pickChocolate(choice) {
+    answers.chocolate = choice;
+    showDate();
+  }
+
+  function showDate() {
     page.innerHTML = `
       <div class="emoji">✨</div>
-      <h2>where should we go?</h2>
+      <h2>our perfect date?</h2>
 
-      <button class="option" onclick="finalPage()">🎬 Movie date</button>
-      <button class="option" onclick="finalPage()">☕ Cozy café</button>
-      <button class="option" onclick="finalPage()">🌅 Long drive</button>
-      <button class="option" onclick="finalPage()">🏠 Stay in</button>
+      <button class="option" onclick="pickDate('Movie date 🎬')">🎬 Movie date</button>
+      <button class="option" onclick="pickDate('Cozy café ☕')">☕ Cozy café</button>
+      <button class="option" onclick="pickDate('Sunset walk 🌅')">🌅 Long Drive</button>
+      <button class="option" onclick="pickDate('Stay in 🏠')">🏠 Stay in</button>
     `;
   }
 
-  function finalPage() {
+  function pickDate(choice) {
+    answers.date = choice;
+    showFinal();
+  }
+
+  function showFinal() {
     page.innerHTML = `
       <div class="emoji">💘</div>
-      <h2>IT'S A DATEEE!</h2>
-      <p style="font-size:18px; margin-top:10px;">
-        whatever you chose,<br>
-        i just want it to be with you 💗
+      <h2>it's a date, Dhruv</h2>
+
+      <p style="font-size:18px; margin-top:15px;">
+        🌸 Flowers: <b>${answers.flowers}</b><br><br>
+        🍫 Chocolate: <b>${answers.chocolate}</b><br><br>
+        ✨ Date: <b>${answers.date}</b>
       </p>
-      <p style="margin-top:20px; font-size:16px;">
-        see you on valentine’s 💌
+
+      <p style="margin-top:25px; font-size:16px;">
+        screenshot this and send it to me 💗
       </p>
     `;
   }
@@ -166,3 +181,4 @@
 
 </body>
 </html>
+
