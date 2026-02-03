@@ -68,15 +68,17 @@
 
 <body>
 
-  <div class="card" id="page">
-    <div class="emoji">💖</div>
-    <h1>Dhruv</h1>
-    <h2>will you be my valentine?</h2>
+<div class="card" id="page">
+  <div class="emoji">💖</div>
+  <h1>Dhruv</h1>
+  <h2>will you be my valentine?</h2>
 
-    <button class="primary" onclick="flowers()">Yes</button>
-  </div>
+  <button class="primary" onclick="flowers()">Yes</button>
+</div>
 
 <script>
+  const yourNumber = "91XXXXXXXXXX"; // <-- PUT YOUR NUMBER HERE
+
   let answers = {
     flowers: "",
     chocolate: "",
@@ -84,15 +86,14 @@
   };
 
   const page = document.getElementById("page");
-  const yourNumber = "YOUR_NUMBER_HERE"; // eg: 91XXXXXXXXXX
 
   function flowers() {
     page.innerHTML = `
       <div class="emoji">🌸</div>
       <h2>choose your favourite flowers</h2>
 
-      <button class="option" onclick="pickFlower('Roses 🌹')">🌹 Roses</button>
       <button class="option" onclick="pickFlower('Sunflowers 🌻')">🌻 Sunflowers</button>
+      <button class="option" onclick="pickFlower('Roses 🌹')">🌹 Roses</button>
       <button class="option" onclick="pickFlower('Tulips 🌷')">🌷 Tulips</button>
       <button class="option" onclick="pickFlower('Surprise 💐')">💐 Surprise me</button>
     `;
@@ -100,16 +101,16 @@
 
   function pickFlower(choice) {
     answers.flowers = choice;
-    chocolate();
+    chocolates();
   }
 
-  function chocolate() {
+  function chocolates() {
     page.innerHTML = `
       <div class="emoji">🍫</div>
       <h2>pick your chocolate</h2>
 
-      <button class="option" onclick="pickChocolate('Dairy Milk 🍫')">🍫 Dairy Milk</button>
       <button class="option" onclick="pickChocolate('Ferrero Rocher 🍬')">🍬 Ferrero Rocher</button>
+      <button class="option" onclick="pickChocolate('Dairy Milk 🍫')">🍫 Dairy Milk</button>
       <button class="option" onclick="pickChocolate('Anything sweet 🍩')">🍩 Anything sweet</button>
       <button class="option" onclick="pickChocolate('You 😏')">😏 You</button>
     `;
@@ -123,10 +124,10 @@
   function datePick() {
     page.innerHTML = `
       <div class="emoji">✨</div>
-      <h2>our perfect date?</h2>
+      <h2>where should we go?</h2>
 
-      <button class="option" onclick="finish('Movie date 🎬')">🎬 Movie date</button>
       <button class="option" onclick="finish('Cozy café ☕')">☕ Cozy café</button>
+      <button class="option" onclick="finish('Movie date 🎬')">🎬 Movie date</button>
       <button class="option" onclick="finish('Sunset walk 🌅')">🌅 Long Drive</button>
       <button class="option" onclick="finish('Stay in 🏠')">🏠 Stay in</button>
     `;
@@ -136,7 +137,7 @@
     answers.date = dateChoice;
 
     const message =
-      `Dhruv's Valentine choices 💖%0A%0A` +
+      `Dhruv’s Valentine choices 💖%0A` +
       `🌸 Flowers: ${answers.flowers}%0A` +
       `🍫 Chocolate: ${answers.chocolate}%0A` +
       `✨ Date: ${answers.date}`;
